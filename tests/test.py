@@ -1,4 +1,4 @@
-from models import simpel_clustering_model
+from models.simpel_clustering_model import SimpleClusteringModel
 
 
 """
@@ -16,5 +16,5 @@ densityOfParticels = 30
 stepSize = 10
 jumpingDistance = 100
 
-model = simpel_clustering_model(numAnts, densityOfParticels, stepSize, jumpingDistance)
+model = SimpleClusteringModel(numAnts, densityOfParticels, stepSize, jumpingDistance)
 model.step()
