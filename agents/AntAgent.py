@@ -17,7 +17,7 @@ class AntAgent(Agent):
         pass
 
     def step(self):
-        # comment
+        # comment tests
         model = self.model
         inView = model.particels_in_view(self)
 
