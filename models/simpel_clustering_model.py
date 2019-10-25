@@ -20,7 +20,6 @@ class SimpleClusteringModel(BaseAntModel):
         return view
 
     def step_in_ran_dir(self, agent):
-
         pass
 
     def jump_in_rand_dir(self, agent):

@@ -16,12 +16,7 @@ class BaseAntModel(Model):
 
         self.init_agents()
         self.init_particels()
-        """
 
-
-
-                    
-        """
         pass
 
     def step(self):
