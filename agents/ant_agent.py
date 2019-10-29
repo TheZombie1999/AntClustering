@@ -28,7 +28,7 @@ class AntAgent(Agent):
             # jump j steps in random direction
             model.jump_in_rand_dir(self)
 
-        elif self.particel and not inView:
+        elif self.particel and inView:
             # drop oi at empty place
             model.drop_particel(self)
             # jump j steps in random direction

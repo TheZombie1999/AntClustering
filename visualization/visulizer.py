@@ -7,7 +7,7 @@ from agents.particel_agent import ParticelAgent
 from agents.ant_agent import AntAgent
 
 
-class Visulizer :
+class Visulizer:
     def __init__(self, model):
         self.model = model
         self.particel_data = []

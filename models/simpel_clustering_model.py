@@ -14,7 +14,7 @@ class SimpleClusteringModel(BaseAntModel):
     # returns list of all particels an agent can see
     def particels_in_view(self, agent):
         view = []
-        print(agent.pos)
+
         x = self.grid.get_neighbors(agent.pos, include_center=True, radius=agent.site, moore=True)
 
         for i in x:
@@ -64,11 +64,12 @@ class SimpleClusteringModel(BaseAntModel):
         for i in range(self.num_ants):
             x = self.random.randrange(0,self.grid.width)
             y = self.random.randrange(0,self.grid.height)
-            a = AntAgent(i, self, startpos=(x,y), site= 3)
+            a = AntAgent(i, self, startpos=(x,y), site= 1)
             self.schedule.add(a)
             self.grid.place_agent(a,(x,y))
 
     def step(self):
         self.schedule.step()
+        print("step")
 
     pass

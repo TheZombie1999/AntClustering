@@ -14,6 +14,7 @@ class BaseAntModel(Model):
         self.grid_size = 50
         self.density_of_particels = density_of_particels
         self.grid = MultiGrid(self.grid_size, self.grid_size, True)
+        self.running = True
 
         self.init_agents()
         self.init_particels()
