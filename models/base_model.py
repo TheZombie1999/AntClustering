@@ -1,6 +1,7 @@
 from mesa import Model
 from mesa.time import RandomActivation
 from mesa.space import MultiGrid
+from mesa.datacollection import DataCollector
 
 
 class BaseAntModel(Model):
@@ -17,10 +18,14 @@ class BaseAntModel(Model):
         self.init_agents()
         self.init_particels()
 
+        self.data_collection = DataCollector(model_reporters={"agent_count":
+                                    lambda m: m.schedule.get_agent_count()},
+                                agent_reporters={"name": lambda a: a.name})
         pass
 
     def step(self):
         self.schedule.step()
+        self.dc.collect(self)
         pass
 
     # returns list of all particels an agent can see

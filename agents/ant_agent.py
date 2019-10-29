@@ -21,13 +21,14 @@ class AntAgent(Agent):
         model = self.model
         inView = model.particels_in_view(self)
 
-        if inView and not self.particel:
+        if  inView and not self.particel:
+
             # pickUp(object)
-            model.pick_particel(self)
+            model.pick_particel(self, inView)
             # jump j steps in random direction
             model.jump_in_rand_dir(self)
 
-        elif self.particel and inView:
+        elif self.particel and not inView:
             # drop oi at empty place
             model.drop_particel(self)
             # jump j steps in random direction
