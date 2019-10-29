@@ -13,3 +13,4 @@ v = Visulizer(model=model)
 v.collect_data(num_steps)
 for i in range(num_steps):
     v.visulize_data(i)
+
