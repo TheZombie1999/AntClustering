@@ -11,9 +11,9 @@ class ServerVizuliser:
         #super().__init__(model=model)
         grid = CanvasGrid(self.agent_portrayal, 50, 50, 500, 500)
         server = ModularServer(SimpleClusteringModel,
-                               [grid],
-                               "Ant Model",
-                               { "num_ants":50, "density_of_particels":10, "step_size":5, "jumping_distance":10})
+                               visualization_elements= [grid],
+                               name ="Ant Model",
+                               model_params={"mid":model.middel, "num_ants":model.num_ants, "density_of_particels":model.density_of_particels, "step_size":model.step_size, "jumping_distance":model.jumping_distance})
         server.port = 8525  # The default
         server.launch()
         pass
@@ -26,6 +26,9 @@ class ServerVizuliser:
                         "Filled": "true",
                         "Layer": 0,
                         "r": 0.5}
+            if agent.particel:
+                portrayal["Color"] = "black"
+
 
         if type(agent) is ParticelAgent:
             portrayal = {"Shape": "circle",

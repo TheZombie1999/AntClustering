@@ -7,8 +7,10 @@ from util.util import Util
 
 class SimpleClusteringModel(BaseAntModel):
 
-    def __init__(self, num_ants=10, density_of_particels=1, step_size=10, jumping_distance=10):
+    def __init__(self, mid, num_ants=10, density_of_particels=1, step_size=10, jumping_distance=10):
+        self.middel = mid
         super().__init__(num_ants, density_of_particels, step_size, jumping_distance)
+        pass
 
 
     # returns list of all particels an agent can see
@@ -60,16 +62,20 @@ class SimpleClusteringModel(BaseAntModel):
         pass
 
     def init_agents(self):
-
-        for i in range(self.num_ants):
-            x = self.random.randrange(0,self.grid.width)
-            y = self.random.randrange(0,self.grid.height)
-            a = AntAgent(i, self, startpos=(x,y), site= 1)
-            self.schedule.add(a)
-            self.grid.place_agent(a,(x,y))
+        if self.middel:
+            for i in range(self.num_ants):
+                pos = (round(self.grid.width/2), round(self.grid.height/2))
+                a = AntAgent(i,self,startpos=pos,site=1)
+                self.schedule.add(a)
+                self.grid.place_agent(a,pos)
+        else:
+            for i in range(self.num_ants):
+                x = self.random.randrange(0,self.grid.width)
+                y = self.random.randrange(0,self.grid.height)
+                a = AntAgent(i, self, startpos=(x,y), site= 1)
+                self.schedule.add(a)
+                self.grid.place_agent(a,(x,y))
 
     def step(self):
         self.schedule.step()
-        print("step")
-
     pass
