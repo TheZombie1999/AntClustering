@@ -31,8 +31,8 @@ class ComplexClusteringModel(SimpleClusteringModel):
         neighborCount = len(particleNeighbors)
         similarity = 0
         for x in range(neighborCount):
-            averageSimilarity = (abs(agent.particel.particleType - particleNeighbors[x].particleType) / self.particleThreshhold)
-            similarity += 1 - averageSimilarity
+            averageSimilarity =  0 if  (agent.particel.particleType - particleNeighbors[x].particleType) != 0 else 1
+            similarity += averageSimilarity
         similarity *= 1/perceptedFields
         return similarity
 

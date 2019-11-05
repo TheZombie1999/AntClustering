@@ -26,7 +26,8 @@ class ServerComplexVisulizer:
 
     def agent_portrayal(self, agent):
         self.model.particleThreshhold
-        color = ["green", "yellow", "orange", "brown", "grey", "pink"]
+        #color = ["#7FFF00", "#00FF00", "#9ACD32", "#ADFF2F", "yellow", "khaki", "peachpuff", "moccasin", "gold", "orange", "darkorange", "coral", "tomato", "orangered", "indianred", "crimson", "red", "darkred", "firebrick", "indianred"]#
+        color = ["blue", "green", "orange"]
         protrayal = None
         if type(agent) is AntAgent:
             portrayal = {"Shape": "circle",
