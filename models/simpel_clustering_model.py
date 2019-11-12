@@ -4,6 +4,7 @@ from agents.ant_agent import AntAgent
 from agents.particel_agent import ParticelAgent
 from util.util import Util
 
+from entropies.ant_entropy import AntEntropy
 
 class SimpleClusteringModel(BaseAntModel):
 
@@ -62,11 +63,13 @@ class SimpleClusteringModel(BaseAntModel):
         pass
 
     def init_agents(self):
+        ants = []
         if self.middel:
             for i in range(self.num_ants):
                 pos = (round(self.grid.width/2), round(self.grid.height/2))
                 a = AntAgent(i,self,startpos=pos,site=1)
                 self.schedule.add(a)
+                ants.append(a)
                 self.grid.place_agent(a,pos)
         else:
             for i in range(self.num_ants):
@@ -74,8 +77,11 @@ class SimpleClusteringModel(BaseAntModel):
                 y = self.random.randrange(0,self.grid.height)
                 a = AntAgent(i, self, startpos=(x,y), site= 1)
                 self.schedule.add(a)
+                ants.append(a)
                 self.grid.place_agent(a,(x,y))
+
+        self.ant_entropy = AntEntropy(self.grid, ants)
 
     def step(self):
         self.schedule.step()
-    pass
+        pass

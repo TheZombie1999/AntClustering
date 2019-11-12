@@ -3,7 +3,6 @@ from mesa.time import RandomActivation
 from mesa.space import MultiGrid
 from mesa.datacollection import DataCollector
 
-
 class BaseAntModel(Model):
 
     def __init__(self, num_ants, density_of_particels, step_size, jumping_distance):
@@ -15,6 +14,9 @@ class BaseAntModel(Model):
         self.density_of_particels = density_of_particels
         self.grid = MultiGrid(self.grid_size, self.grid_size, True)
         self.running = True
+
+        self.particle_entropy = None
+        self.ant_entropy = None
 
         self.init_agents()
         self.init_particels()
@@ -49,4 +51,7 @@ class BaseAntModel(Model):
         pass
 
     def init_agents (self):
+        pass
+
+    def system_entropy(self):
         pass
