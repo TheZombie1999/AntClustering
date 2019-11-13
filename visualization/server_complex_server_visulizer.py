@@ -17,7 +17,7 @@ class ServerComplexVisulizer:
         self.model = model
         grid = CanvasGrid(self.agent_portrayal, 50, 50, 500, 500)
 
-        chart = ChartModule([{"Label": "Gini",
+        chart = ChartModule([{"Label": "Emergence",
                               "Color": "Black"}],
                             data_collector_name='datacollector')
 
@@ -52,3 +52,4 @@ class ServerComplexVisulizer:
                          "r": 0.2}
             portrayal["Color"] = color[agent.particleType]
         return portrayal
+
