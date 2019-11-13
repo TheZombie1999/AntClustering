@@ -21,12 +21,14 @@ class BaseAntModel(Model):
         self.init_agents()
         self.init_particels()
 
+        self.ant_agents = []
+        self.particle_agents = []
 
         self.data_collection = DataCollector(model_reporters={"agent_count":
                                     lambda m: m.schedule.get_agent_count()})
 
         self.datacollector = DataCollector({
-            "emergence": lambda m: BaseEntropy.get_system_entropy(m)
+            "emergence": lambda m: BaseEntropy.entropy_x(m.ant_agents, m.grid.width)
         })
 
         pass
@@ -36,7 +38,7 @@ class BaseAntModel(Model):
 
     def step(self):
         self.schedule.step()
-        #self.dc.collect(self)
+        self.datacollector.collect(self)
 
         pass
 
