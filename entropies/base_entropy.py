@@ -39,15 +39,15 @@ class BaseEntropy:
         return -1 * entropy
 
     def specific_entropy_particle(grid, agents):
-        frequencies = [0] * 10
+        frequencies = [0] * 9
         entropy = 0
         for x in range(len(agents)):
             agent = agents[x]
             siblings = BaseEntropy.same_outer_particles(grid, agent)
             frequencies[siblings] = frequencies[siblings] + 1
 
-        for y in range(11):
-            ratio = frequencies[y] / 10
+        for y in range(10):
+            ratio = frequencies[y] / 9
             entropy += ratio * math.log2(ratio)
 
         return -1 * entropy
