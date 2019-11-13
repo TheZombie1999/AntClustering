@@ -25,8 +25,7 @@ class BaseAntModel(Model):
                                     lambda m: m.schedule.get_agent_count()})
 
         self.datacollector = DataCollector({
-            "emergence": lambda m :
-                BaseEntropy.get_system_entropy(m)
+            "emergence": lambda m: BaseEntropy.get_system_entropy(m)
         })
 
         pass
