@@ -1,4 +1,5 @@
 import math
+import random
 
 from agents.typed_particle_agent import TypedParticelAgent
 
@@ -27,6 +28,7 @@ class BaseEntropy:
                 print("x_ration: " + str(x_ratio))
 
         return -1 * entropy
+
 
     def entropy_y(agents, y_margin):
         frequencies = [0] * y_margin
