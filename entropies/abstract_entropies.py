@@ -1,6 +1,10 @@
+import math
+
+from agents.typed_particle_agent import TypedParticelAgent
+
 
 class AbstractEntropies:
-def same_outer_particles(grid, agent):
+    def same_outer_particles(grid, agent):
         siblings = 0
         x = grid.get_neighbors(agent.pos, include_center=False, radius=1, moore=True)
         for i in x:
