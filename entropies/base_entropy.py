@@ -2,75 +2,57 @@ import math
 from agents.typed_particle_agent import TypedParticelAgent
 
 class BaseEntropy():
-    def single_ant_entropy(agent):
-        return (1 if agent.particel is None else 2) / 2
 
-
-    def same_outer_particles(self, agent):
+    def same_outer_particles(grid, agent):
         siblings = 0
-        x = self.grid.get_neighbors(agent.pos, include_center=False, radius=1, moore=True)
+        x = grid.get_neighbors(agent.pos, include_center=False, radius=1, moore=True)
         for i in x:
             if type(i) is TypedParticelAgent and i.particleType == agent.particleType:
                 siblings += 1
         return siblings
 
-    def single_particle_entropy(grid, agent):
-        return BaseEntropy.same_outer_particles(agent) / 9
-
-
-    def get_ant_entropy(model):
-        agents = model.ant_agents
-        grid_size = model.grid.width
-        Hx = 0
-        Hy = 0
-        Hbehaviour = 0
-
-        x_frequencies = [0] * grid_size
-        y_frequencies = [0] * grid_size
-
-        for x in range(grid_size):
+    def entropy_x(agents, x_margin):
+        frequencies = [0] * x_margin
+        entropy = 0
+        for x in range(len(agents)):
             agent = agents[x]
-            x_frequencies[agent.pos[0]] = x_frequencies[agent.pos[0]] + 1
-            y_frequencies[agent.pos[1]] = y_frequencies[agent.pos[1]] + 1
+            frequencies[agent.pos[0]] = frequencies[agent.pos[0]] + 1
 
-            ratio = BaseEntropy.single_ant_entropy(agent)
-            Hbehaviour += ratio * math.log2(ratio)
+        for y in range(range(x_margin)):
+            x_ratio = frequencies[y] / x_margin
+            entropy += x_ratio * math.log2(x_ratio)
 
-        for x in range(grid_size):
-            x_ratio = x_frequencies[x] / grid_size
-            y_ratio = y_frequencies[x] / grid_size
+        return -1 * entropy
 
-            Hx += x_ratio * math.log2(x_ratio)
-            Hy += y_ratio * math.log2(y_ratio)
-
-        return (-1 * Hx) + (-1 * Hy) + (-1 * Hbehaviour)
-
-    def get_particle_entropy(model):
-        agents = model.particle_agents
-        grid_size = model.grid.width
-        Hx = 0
-        Hy = 0
-        Hbehaviour = 0
-
-        x_frequencies = [0] * grid_size
-        y_frequencies = [0] * grid_size
-
-        for x in range(grid_size):
+    def entropy_y(agents, y_margin):
+        frequencies = [0] * y_margin
+        entropy = 0
+        for x in range(len(agents)):
             agent = agents[x]
-            x_frequencies[agent.pos[0]] = x_frequencies[agent.pos[0]] + 1
-            y_frequencies[agent.pos[1]] = y_frequencies[agent.pos[1]] + 1
+            frequencies[agent.pos[1]] = frequencies[agent.pos[1]] + 1
 
-            ratio = BaseEntropy.single_particle_entropy(model.grid, agent)
-            Hbehaviour += ratio * math.log2(ratio)
+        for y in range(range(y_margin)):
+            y_ratio = frequencies[y] / y_margin
+            entropy += y_ratio * math.log2(y_ratio)
 
-        for x in range(grid_size):
-            x_ratio = x_frequencies[x] / grid_size
-            y_ratio = y_frequencies[x] / grid_size
+        return -1 * entropy
 
-            Hx += x_ratio * math.log2(x_ratio)
-            Hy += y_ratio * math.log2(y_ratio)
+    def specific_entropy_particle(grid, agents):
+        frequencies = [0] * 10
+        entropy = 0
+        for x in range(len(agents)):
+            agent = agents[x]
+            siblings = BaseEntropy.same_outer_particles(grid, agent)
+            frequencies[siblings] = frequencies[siblings] + 1
 
-        return (-1 * Hx) + (-1 * Hy) + (-1 * Hbehaviour)
+        for y in range(11):
+            ratio = frequencies[y] / 10
+            entropy += ratio * math.log2(ratio)
 
-    def get_system_entropy(model):
-        return BaseEntropy.get_ant_entropy(model) + BaseEntropy.get_particle_entropy(model)
+        return -1 * entropy
+
+
+    def specific_entropy_ant(agents):
+        laden = sum(a.particel is not None for a in agents)
+        ratio = laden / len(agents)
+        return -1 * ratio * math.log2(ratio)
