@@ -2,17 +2,17 @@ import random
 from agents.typed_particle_agent import TypedParticelAgent
 from models.simpel_clustering_model import SimpleClusteringModel
 
-
-
 class ComplexClusteringModel(SimpleClusteringModel):
 
-    def __init__(self,mid ,num_ants, density_of_particels, step_size, jumping_distance, perceptionRadius, particleThreshhold , kPlus, kMinus):
+    def __init__(self, mid ,num_ants, density_of_particels, step_size, jumping_distance, perceptionRadius, particleThreshhold , kPlus, kMinus):
         super().__init__(mid, num_ants, density_of_particels, step_size, jumping_distance)
+
 
         self.perceptionRadius = perceptionRadius
         self.particleThreshhold = particleThreshhold
         self.kPlus = kPlus
         self.kMinus = kMinus
+
         pass
 
     def particles_in_radius(self, agent, radius):
@@ -59,12 +59,16 @@ class ComplexClusteringModel(SimpleClusteringModel):
         pass
 
     def init_particels(self):
+        particles = []
+
         for x in range(self.grid_size):
             for y in range(self.grid_size):
 
                 if random.randrange(0, 100, step = 1) < self.density_of_particels:
                     p = TypedParticelAgent(model= self, unique_id= x,pos =(x, y), particleType=random.randint(a = 0, b = 2))
+                    particles.append(p)
                     self.grid.place_agent(p, (x, y))
+                    self.particle_agents.append(p)
 
     def particels_in_view(self, agent):
         view = []
@@ -75,3 +79,4 @@ class ComplexClusteringModel(SimpleClusteringModel):
             if type(i) is TypedParticelAgent:
                 view.append(i)
         return view
+

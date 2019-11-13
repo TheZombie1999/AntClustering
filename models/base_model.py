@@ -2,10 +2,9 @@ from mesa import Model
 from mesa.time import RandomActivation
 from mesa.space import MultiGrid
 from mesa.datacollection import DataCollector
-
+from entropies.base_entropy import BaseEntropy
 
 class BaseAntModel(Model):
-
     def __init__(self, num_ants, density_of_particels, step_size, jumping_distance):
         self.step_size = step_size
         self.jumping_distance = jumping_distance
@@ -16,17 +15,30 @@ class BaseAntModel(Model):
         self.grid = MultiGrid(self.grid_size, self.grid_size, True)
         self.running = True
 
+        self.ant_entropy = None
+        self.particle_entropy = None
+
         self.init_agents()
         self.init_particels()
 
+
         self.data_collection = DataCollector(model_reporters={"agent_count":
-                                    lambda m: m.schedule.get_agent_count()},
-                                agent_reporters={"name": lambda a: a.name})
+                                    lambda m: m.schedule.get_agent_count()})
+
+        self.datacollector = DataCollector({
+            "emergence": lambda m :
+                BaseEntropy.get_system_entropy(m)
+        })
+
+        pass
+
+    def compute_entropy(self):
         pass
 
     def step(self):
         self.schedule.step()
-        self.dc.collect(self)
+        #self.dc.collect(self)
+
         pass
 
     # returns list of all particels an agent can see
@@ -49,4 +61,7 @@ class BaseAntModel(Model):
         pass
 
     def init_agents (self):
+        pass
+
+    def system_entropy(self):
         pass
