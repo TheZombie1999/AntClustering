@@ -77,7 +77,3 @@ class SimpleClusteringModel(BaseAntModel):
                 self.schedule.add(a)
                 self.ant_agents.append(a)
                 self.grid.place_agent(a,(x,y))
-
-    def step(self):
-        self.schedule.step()
-        pass

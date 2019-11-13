@@ -20,7 +20,7 @@ class BaseEntropy():
 
     def get_ant_entropy(model):
         agents = model.ant_agents
-        grid_size = model.grid.grid_size
+        grid_size = model.grid.width
         Hx = 0
         Hy = 0
         Hbehaviour = 0
@@ -30,8 +30,8 @@ class BaseEntropy():
 
         for x in range(grid_size):
             agent = agents[x]
-            x_frequencies[agent.pos[0]] = x_frequencies[agent.pos] + 1
-            y_frequencies[agent.pos[1]] = y_frequencies[agent.pos] + 1
+            x_frequencies[agent.pos[0]] = x_frequencies[agent.pos[0]] + 1
+            y_frequencies[agent.pos[1]] = y_frequencies[agent.pos[1]] + 1
 
             ratio = BaseEntropy.single_ant_entropy(agent)
             Hbehaviour += ratio * math.log2(ratio)
@@ -47,7 +47,7 @@ class BaseEntropy():
 
     def get_particle_entropy(model):
         agents = model.particle_agents
-        grid_size = model.grid.grid_size
+        grid_size = model.grid.width
         Hx = 0
         Hy = 0
         Hbehaviour = 0
@@ -57,8 +57,8 @@ class BaseEntropy():
 
         for x in range(grid_size):
             agent = agents[x]
-            x_frequencies[agent.pos[0]] = x_frequencies[agent.pos] + 1
-            y_frequencies[agent.pos[1]] = y_frequencies[agent.pos] + 1
+            x_frequencies[agent.pos[0]] = x_frequencies[agent.pos[0]] + 1
+            y_frequencies[agent.pos[1]] = y_frequencies[agent.pos[1]] + 1
 
             ratio = BaseEntropy.single_particle_entropy(model.grid, agent)
             Hbehaviour += ratio * math.log2(ratio)

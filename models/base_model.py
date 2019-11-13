@@ -36,7 +36,7 @@ class BaseAntModel(Model):
 
     def step(self):
         self.schedule.step()
-        #self.dc.collect(self)
+        self.datacollector.collect(self)
 
         pass
 
