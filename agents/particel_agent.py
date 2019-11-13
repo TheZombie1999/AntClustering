@@ -7,6 +7,7 @@ class ParticelAgent (Agent):
         super().__init__(unique_id, model)
         self.unique_id = unique_id
         self.pos = pos
+        self.onfloor = True
         pass
 
     def __step__(self):

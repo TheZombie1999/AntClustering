@@ -7,6 +7,7 @@ class ComplexClusteringModel(SimpleClusteringModel):
     def __init__(self, mid ,num_ants, density_of_particels, step_size, jumping_distance, perceptionRadius, particleThreshhold , kPlus, kMinus):
         super().__init__(mid, num_ants, density_of_particels, step_size, jumping_distance)
 
+
         self.perceptionRadius = perceptionRadius
         self.particleThreshhold = particleThreshhold
         self.kPlus = kPlus

@@ -1,10 +1,10 @@
 from mesa.visualization.ModularVisualization import ModularServer
-from mesa.visualization.modules import CanvasGrid
+from mesa.visualization.modules import CanvasGrid, ChartModule
 import random
 from agents.ant_agent import AntAgent
 from agents.typed_particle_agent import TypedParticelAgent
 from models.complex_clustering_model import ComplexClusteringModel
-from mesa.visualization.modules import ChartModule
+
 
 class ComplexClusteringMode(object):
     pass
@@ -17,10 +17,12 @@ class ServerComplexVisulizer:
         self.model = model
         grid = CanvasGrid(self.agent_portrayal, 50, 50, 500, 500)
 
-        chart = ChartModule([{"Label": "Emergence", "Color": "Black"}], data_collector_name='datacollector')
+        chart = ChartModule([{"Label": "Gini",
+                              "Color": "Black"}],
+                            data_collector_name='datacollector')
 
         server = ModularServer(ComplexClusteringModel,
-                               visualization_elements= [grid, chart],
+                               visualization_elements= [grid,chart],
                                name ="Ant Model",
                                model_params={"mid":model.middel, "num_ants":model.num_ants, "density_of_particels":model.density_of_particels, "step_size":model.step_size, "jumping_distance":model.jumping_distance,"perceptionRadius":model.perceptionRadius,"particleThreshhold": model.particleThreshhold,"kPlus": model.kPlus,"kMinus": model.kMinus})
         server.port = 8525  # The default
