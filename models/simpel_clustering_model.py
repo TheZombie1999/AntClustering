@@ -58,6 +58,7 @@ class SimpleClusteringModel(BaseAntModel):
                 if random.randrange(0, 100, step = 1) < self.density_of_particels:
                     p = ParticelAgent(model= self, unique_id= x,pos =(x, y))
                     self.grid.place_agent(p, (x, y))
+                    self.particle_agents.append(p)
         pass
 
     def init_agents(self):
@@ -67,6 +68,7 @@ class SimpleClusteringModel(BaseAntModel):
                 a = AntAgent(i,self,startpos=pos,site=1)
                 self.schedule.add(a)
                 self.grid.place_agent(a,pos)
+                self.ant_agents.append(a)
         else:
             for i in range(self.num_ants):
                 x = self.random.randrange(0,self.grid.width)
@@ -74,6 +76,7 @@ class SimpleClusteringModel(BaseAntModel):
                 a = AntAgent(i, self, startpos=(x,y), site= 1)
                 self.schedule.add(a)
                 self.grid.place_agent(a,(x,y))
+                self.ant_agents.append(a)
 
     def step(self):
         self.schedule.step()

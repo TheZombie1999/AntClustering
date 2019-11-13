@@ -13,6 +13,7 @@ class BaseEntropy:
         return siblings
 
     def entropy_x(agents, x_margin):
+
         frequencies = [0] * x_margin
         entropy = 0
         for agent in agents:
@@ -20,7 +21,10 @@ class BaseEntropy:
 
         for y in range(x_margin):
             x_ratio = frequencies[y] / x_margin
-            entropy += x_ratio * math.log2(x_ratio)
+            try:
+                entropy += x_ratio * math.log2(x_ratio)
+            except ValueError:
+                print("x_ration: " + str(x_ratio))
 
         return -1 * entropy
 
