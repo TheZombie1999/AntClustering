@@ -2,11 +2,9 @@ import random
 from agents.typed_particle_agent import TypedParticelAgent
 from models.simpel_clustering_model import SimpleClusteringModel
 
-from entropies.particle_entropy import ParticleEntropy
-
 class ComplexClusteringModel(SimpleClusteringModel):
 
-    def __init__(self,mid ,num_ants, density_of_particels, step_size, jumping_distance, perceptionRadius, particleThreshhold , kPlus, kMinus):
+    def __init__(self, mid ,num_ants, density_of_particels, step_size, jumping_distance, perceptionRadius, particleThreshhold , kPlus, kMinus):
         super().__init__(mid, num_ants, density_of_particels, step_size, jumping_distance)
 
 
@@ -70,7 +68,7 @@ class ComplexClusteringModel(SimpleClusteringModel):
                     p = TypedParticelAgent(model= self, unique_id= x,pos =(x, y), particleType=random.randint(a = 0, b = 2))
                     particles.append(p)
                     self.grid.place_agent(p, (x, y))
-        self.particle_entropy = ParticleEntropy(self.grid, particles)
+                    self.particle_agents.append(p)
 
     def particels_in_view(self, agent):
         view = []

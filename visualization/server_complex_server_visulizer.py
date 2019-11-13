@@ -17,7 +17,7 @@ class ServerComplexVisulizer:
         self.model = model
         grid = CanvasGrid(self.agent_portrayal, 50, 50, 500, 500)
 
-        chart = ChartModule([{"Label": "Emergence",
+        chart = ChartModule([{"Label": "Gini",
                               "Color": "Black"}],
                             data_collector_name='datacollector')
 
