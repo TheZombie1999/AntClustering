@@ -25,7 +25,7 @@ class BaseEntropy:
             try:
                 entropy += x_ratio * math.log2(x_ratio)
             except ValueError:
-                print("x_ration: " + str(x_ratio))
+                pass
 
         return -1 * entropy
 
@@ -38,7 +38,10 @@ class BaseEntropy:
 
         for y in range(y_margin):
             y_ratio = frequencies[y] / y_margin
-            entropy += y_ratio * math.log2(y_ratio)
+            try:
+                entropy += y_ratio * math.log2(y_ratio)
+            except:
+                pass
 
         return -1 * entropy
 
@@ -51,8 +54,10 @@ class BaseEntropy:
 
         for y in range(10):
             ratio = frequencies[y] / 9
-            entropy += ratio * math.log2(ratio)
-
+            try:
+                entropy += ratio * math.log2(ratio)
+            except:
+                pass
         return -1 * entropy
 
 

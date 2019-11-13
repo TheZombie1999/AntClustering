@@ -19,12 +19,14 @@ class AbstractEntropies:
         for agent in agents:
             pos = AbstractEntropies.translate(agent.pos[0],0,grid.size, 0, x_margin)
             pos = round(pos)
-            frequencies[pos] = frequencies[pos] + 1
+            frequencies[pos] += 1
 
         for y in range(x_margin):
             x_ratio = frequencies[y] / x_margin
-            entropy += x_ratio * math.log2(x_ratio)
-
+            try:
+                entropy += x_ratio * math.log2(x_ratio)
+            except:
+                pass
         return -1 * entropy
 
     def entropy_y2(agents, grid, y_margin):
@@ -37,8 +39,10 @@ class AbstractEntropies:
 
         for y in range(y_margin):
             y_ratio = frequencies[y] / y_margin
-            entropy += y_ratio * math.log2(y_ratio)
-
+            try:
+                entropy += y_ratio * math.log2(y_ratio)
+            except ValueError:
+                pass
         return -1 * entropy
 
     def specific_entropy_particle(grid, agents, radius):
