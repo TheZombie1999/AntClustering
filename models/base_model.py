@@ -18,11 +18,13 @@ class BaseAntModel(Model):
         self.ant_entropy = None
         self.particle_entropy = None
 
+        self.ant_agents = []
+        self.particle_agents = []
+        
         self.init_agents()
         self.init_particels()
 
-        self.ant_agents = []
-        self.particle_agents = []
+
 
         self.data_collection = DataCollector(model_reporters={"agent_count":
                                     lambda m: m.schedule.get_agent_count()})

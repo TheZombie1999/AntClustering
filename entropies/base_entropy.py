@@ -15,11 +15,10 @@ class BaseEntropy:
     def entropy_x(agents, x_margin):
         frequencies = [0] * x_margin
         entropy = 0
-        for x in range(len(agents)):
-            agent = agents[x]
-            frequencies[agent.pos[0]] = frequencies[agent.pos[0]] + 1
+        for agent in agents:
+            frequencies[agent.pos[0]] += 1
 
-        for y in range(range(x_margin)):
+        for y in range(x_margin):
             x_ratio = frequencies[y] / x_margin
             entropy += x_ratio * math.log2(x_ratio)
 
@@ -28,11 +27,10 @@ class BaseEntropy:
     def entropy_y(agents, y_margin):
         frequencies = [0] * y_margin
         entropy = 0
-        for x in range(len(agents)):
-            agent = agents[x]
+        for agent in agents:
             frequencies[agent.pos[1]] = frequencies[agent.pos[1]] + 1
 
-        for y in range(range(y_margin)):
+        for y in range(y_margin):
             y_ratio = frequencies[y] / y_margin
             entropy += y_ratio * math.log2(y_ratio)
 
@@ -41,8 +39,7 @@ class BaseEntropy:
     def specific_entropy_particle(grid, agents):
         frequencies = [0] * 9
         entropy = 0
-        for x in range(len(agents)):
-            agent = agents[x]
+        for agent in agents:
             siblings = BaseEntropy.same_outer_particles(grid, agent)
             frequencies[siblings] = frequencies[siblings] + 1
 
