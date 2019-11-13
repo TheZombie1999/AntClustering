@@ -46,6 +46,7 @@ class BaseEntropy():
         return (-1 * Hx) + (-1 * Hy) + (-1 * Hbehaviour)
 
     def get_particle_entropy(model):
+
         agents = model.particle_agents
         grid_size = model.grid.grid_size
         Hx = 0

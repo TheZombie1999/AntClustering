@@ -52,3 +52,4 @@ class ServerComplexVisulizer:
                          "r": 0.2}
             portrayal["Color"] = color[agent.particleType]
         return portrayal
+

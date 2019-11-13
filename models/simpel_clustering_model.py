@@ -80,4 +80,5 @@ class SimpleClusteringModel(BaseAntModel):
 
     def step(self):
         self.schedule.step()
+        self.datacollector.collect(self)
         pass
