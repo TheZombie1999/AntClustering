@@ -12,7 +12,7 @@ class BaseEntropy():
     def behavioural_entropy_ratio(self, agent):
         pass
 
-    def get_entropy(self):
+    def get_entropy():
         Hx = 0
         Hy = 0
         Hbehaviour = 0

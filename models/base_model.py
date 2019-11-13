@@ -15,20 +15,18 @@ class BaseAntModel(Model):
         self.grid = MultiGrid(self.grid_size, self.grid_size, True)
         self.running = True
 
-        self.particle_entropy = None
         self.ant_entropy = None
+        self.particle_entropy = None
 
         self.init_agents()
         self.init_particels()
 
-        self.data_collection = DataCollector(model_reporters={"agent_count":
-                                    lambda m: m.schedule.get_agent_count()},
-                                agent_reporters={"name": lambda a: a.name})
+        self.schedule.agents()
+
         pass
 
     def step(self):
         self.schedule.step()
-        self.dc.collect(self)
         pass
 
     # returns list of all particels an agent can see
