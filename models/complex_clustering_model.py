@@ -1,16 +1,25 @@
 import random
 from agents.typed_particle_agent import TypedParticelAgent
+from entropies.base_entropy import BaseEntropy
 from models.simpel_clustering_model import SimpleClusteringModel
+
 
 class ComplexClusteringModel(SimpleClusteringModel):
 
     def __init__(self, mid ,num_ants, density_of_particels, step_size, jumping_distance, perceptionRadius, particleThreshhold , kPlus, kMinus):
-
         self.perceptionRadius = perceptionRadius
         self.particleThreshhold = particleThreshhold
         self.kPlus = kPlus
         self.kMinus = kMinus
         super().__init__(mid, num_ants, density_of_particels, step_size, jumping_distance)
+
+        self.entropy_ants_x = BaseEntropy.entropy_x(self.ant_agents, self.grid.width)
+        self.entropy_ants_y = BaseEntropy.entropy_y(self.ant_agents, self.grid.height)
+        self.entropy_ants_special = BaseEntropy.specific_entropy_ant(self.ant_agents)
+
+        self.entropy_particle_x = BaseEntropy.entropy_x(self.particle_agents, self.grid.width)
+        self.entropy_particle_y = BaseEntropy.entropy_y(self.particle_agents, self.grid.height)
+        self.entropy_particle_special = BaseEntropy.specific_entropy_particle(self.grid, self.particle_agents)
         pass
 
     def particles_in_radius(self, agent, radius):
@@ -43,7 +52,7 @@ class ComplexClusteringModel(SimpleClusteringModel):
 
     def drop_particel(self, agent):
         probability = self.dropProbability(agent)
-        print("Drop probability: " + str(probability))
+        # print("Drop probability: " + str(probability))
 
         if random.uniform(0, 1) <= probability:
             super().drop_particel(agent)
@@ -51,7 +60,7 @@ class ComplexClusteringModel(SimpleClusteringModel):
 
     def pick_particel(self, agent, view):
         probability = self.pickProbability(agent)
-        print("Pick probability: " + str(probability))
+        # print("Pick probability: " + str(probability))
         if random.uniform(0, 1) <= probability:
             super().pick_particel(agent, view)
         pass
@@ -77,4 +86,3 @@ class ComplexClusteringModel(SimpleClusteringModel):
             if type(i) is TypedParticelAgent:
                 view.append(i)
         return view
-

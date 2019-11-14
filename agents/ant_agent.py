@@ -41,6 +41,3 @@ class AntAgent(Agent):
             # step in random dir with with s
             model.step_in_ran_dir(self)
             pass
-
-
-

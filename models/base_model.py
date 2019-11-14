@@ -24,13 +24,25 @@ class BaseAntModel(Model):
         self.init_agents()
         self.init_particels()
 
-
-
-        self.data_collection = DataCollector(model_reporters={"agent_count":
-                                    lambda m: m.schedule.get_agent_count()})
-
         self.datacollector = DataCollector({
-            "emergence": lambda m: BaseEntropy.entropy_x(m.ant_agents, m.grid.width)
+            # "entropy_x_ants": lambda m: BaseEntropy.entropy_x(m.ant_agents, m.grid.width)
+            "entropy_x_ants": lambda m: self.emergence_ants_x()
+        })
+        self.datacollector2 = DataCollector({
+            "entropy_y_ants": lambda m: self.emergence_ants_y()
+        })
+        self.datacollector3 = DataCollector({
+            "entropy_special_ants": lambda m: self.emergence_ants_special()
+        })
+
+        self.datacollector4 = DataCollector({
+            "entropy_x_part": lambda n: self.emergence_particle_x()
+        })
+        self.datacollector5 = DataCollector({
+            "entropy_y_part": lambda n: self.emergence_particle_y()
+        })
+        self.datacollector6 = DataCollector({
+            "entropy_special_part": lambda n: self.emergence_particle_special()
         })
 
         pass
@@ -39,9 +51,13 @@ class BaseAntModel(Model):
         pass
 
     def step(self):
-        self.schedule.step()
         self.datacollector.collect(self)
-
+        self.datacollector2.collect(self)
+        self.datacollector3.collect(self)
+        self.datacollector4.collect(self)
+        self.datacollector5.collect(self)
+        self.datacollector6.collect(self)
+        self.schedule.step()
         pass
 
     # returns list of all particels an agent can see
@@ -68,3 +84,23 @@ class BaseAntModel(Model):
 
     def system_entropy(self):
         pass
+
+    # Ants emergence
+    def emergence_ants_x(self):
+        return self.entropy_ants_x - BaseEntropy.entropy_x(self.ant_agents, self.grid.width)
+
+    def emergence_ants_y(self):
+        return self.entropy_ants_y - BaseEntropy.entropy_y(self.ant_agents, self.grid.height)
+
+    def emergence_ants_special(self):
+        return self.entropy_ants_special - BaseEntropy.specific_entropy_ant(self.ant_agents)
+
+    # Particle emergence
+    def emergence_particle_x(self):
+        return self.entropy_particle_x - BaseEntropy.entropy_x(self.particle_agents, self.grid.width)
+
+    def emergence_particle_y(self):
+        return self.entropy_particle_y - BaseEntropy.entropy_y(self.particle_agents, self.grid.height)
+
+    def emergence_particle_special(self):
+        return self.entropy_particle_special - BaseEntropy.specific_entropy_particle(self.grid, self.particle_agents)

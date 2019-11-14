@@ -1,7 +1,5 @@
 from agents.ant_agent import AntAgent
 from agents.particel_agent import ParticelAgent
-from agents.typed_particle_agent import TypedParticelAgent
-from visualization.visulizer import Visulizer
 from models.simpel_clustering_model import SimpleClusteringModel
 from mesa.visualization.modules import CanvasGrid
 from mesa.visualization.ModularVisualization import ModularServer
