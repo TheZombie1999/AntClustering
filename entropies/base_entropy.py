@@ -49,7 +49,7 @@ class BaseEntropy:
         return -1 * entropy
 
     def specific_entropy_particle(grid, agents):
-        frequencies = [0] * 9
+        frequencies = [0] * 10
         entropy = 0
         for agent in agents:
             siblings = BaseEntropy.same_outer_particles(grid, agent)
