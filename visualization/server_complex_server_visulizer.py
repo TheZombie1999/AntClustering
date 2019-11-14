@@ -39,8 +39,19 @@ class ServerComplexVisulizer:
         chart6 = ChartModule([{"Label": "entropy_special_part", "Color": "Black"}],
                              data_collector_name='datacollector6')
 
+        # Abstract entropy
+        chart7 = ChartModule([{"Label": "entropy_x_ants2", "Color": "Black"}], data_collector_name='datacollector7')
+        chart8 = ChartModule([{"Label": "entropy_y_ants2", "Color": "Black"}],
+                             data_collector_name='datacollector8')
+
+        chart9 = ChartModule([{"Label": "entropy_x_part2", "Color": "Black"}], data_collector_name='datacollector9')
+        chart10 = ChartModule([{"Label": "entropy_y_part2", "Color": "Black"}], data_collector_name='datacollector10')
+        chart11 = ChartModule([{"Label": "entropy_special_part2", "Color": "Black"}],
+                              data_collector_name='datacollector11')
+
         server = ModularServer(ComplexClusteringModel,
-                               visualization_elements=[grid, chart, chart2, chart3, chart4, chart5, chart6],
+                               visualization_elements=[grid, chart, chart2, chart3, chart4,
+                                                       chart5, chart6, chart7, chart8, chart9, chart10, chart11],
                                name="Ant Model",
                                model_params=model_params)
         server.port = 8525  # The default

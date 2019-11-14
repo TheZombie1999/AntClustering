@@ -1,5 +1,4 @@
 import math
-import random
 
 from agents.typed_particle_agent import TypedParticelAgent
 
@@ -32,7 +31,6 @@ class BaseEntropy:
 
         return -1 * entropy
 
-
     def entropy_y(agents, y_margin):
         frequencies = [0] * y_margin
         entropy = 0
@@ -64,7 +62,6 @@ class BaseEntropy:
             except ValueError:
                 pass
         return -1 * entropy
-
 
     def specific_entropy_ant(agents):
         laden = 0

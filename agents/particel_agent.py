@@ -12,5 +12,3 @@ class ParticelAgent (Agent):
 
     def __step__(self):
         pass
-
-

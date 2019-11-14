@@ -2,7 +2,6 @@ import random
 from models.base_model import BaseAntModel
 from agents.ant_agent import AntAgent
 from agents.particel_agent import ParticelAgent
-from util.util import Util
 
 
 class SimpleClusteringModel(BaseAntModel):
@@ -11,7 +10,6 @@ class SimpleClusteringModel(BaseAntModel):
         self.middel = mid
         super().__init__(num_ants, density_of_particels, step_size, jumping_distance)
         pass
-
 
     # returns list of all particels an agent can see
     def particels_in_view(self, agent):
@@ -26,14 +24,16 @@ class SimpleClusteringModel(BaseAntModel):
 
     def step_in_ran_dir(self, agent):
 
-        newPos = random.choice(self.grid.get_neighborhood(agent.pos,moore=True,include_center=False,radius=self.step_size))
-        self.grid.move_agent(agent,newPos)
+        newPos = random.choice(self.grid.get_neighborhood(agent.pos, moore=True, include_center=False,
+                                                          radius=self.step_size))
+        self.grid.move_agent(agent, newPos)
         agent.pos = newPos
         pass
 
     def jump_in_rand_dir(self, agent):
-        newPos = random.choice(self.grid.get_neighborhood(agent.pos,moore=True,include_center=False,radius=self.jumping_distance))
-        self.grid.move_agent(agent,newPos)
+        newPos = random.choice(self.grid.get_neighborhood(agent.pos, moore=True, include_center=False,
+                                                          radius=self.jumping_distance))
+        self.grid.move_agent(agent, newPos)
         agent.pos = newPos
         pass
 
@@ -55,8 +55,8 @@ class SimpleClusteringModel(BaseAntModel):
         for x in range(self.grid_size):
             for y in range(self.grid_size):
 
-                if random.randrange(0, 100, step = 1) < self.density_of_particels:
-                    p = ParticelAgent(model= self, unique_id= x,pos =(x, y))
+                if random.randrange(0, 100, step=1) < self.density_of_particels:
+                    p = ParticelAgent(model=self, unique_id=x, pos=(x, y))
                     self.grid.place_agent(p, (x, y))
                     self.particle_agents.append(p)
         pass
@@ -65,17 +65,17 @@ class SimpleClusteringModel(BaseAntModel):
         if self.middel:
             for i in range(self.num_ants):
                 pos = (round(self.grid.width/2), round(self.grid.height/2))
-                a = AntAgent(i,self,startpos=pos,site=1)
+                a = AntAgent(i, self, startpos=pos, site=1)
                 self.schedule.add(a)
-                self.grid.place_agent(a,pos)
+                self.grid.place_agent(a, pos)
                 self.ant_agents.append(a)
         else:
             for i in range(self.num_ants):
-                x = self.random.randrange(0,self.grid.width)
-                y = self.random.randrange(0,self.grid.height)
-                a = AntAgent(i, self, startpos=(x,y), site= 1)
+                x = self.random.randrange(0, self.grid.width)
+                y = self.random.randrange(0, self.grid.height)
+                a = AntAgent(i, self, startpos=(x, y), site=1)
                 self.schedule.add(a)
-                self.grid.place_agent(a,(x,y))
+                self.grid.place_agent(a, (x, y))
                 self.ant_agents.append(a)
 
     # def step(self):

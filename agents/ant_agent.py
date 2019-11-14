@@ -11,7 +11,7 @@ class AntAgent(Agent):
         self.grid = model.grid
 
         self.unique_id = id
-        self.particel = None # place holder for a particel
+        self.particel = None  # place holder for a particel
         self.site = site
         self.pos = np.array(startpos)
         pass
@@ -21,8 +21,7 @@ class AntAgent(Agent):
         model = self.model
         inView = model.particels_in_view(self)
 
-
-        if  inView and not self.particel:
+        if inView and not self.particel:
 
             # pickUp(object)
             model.pick_particel(self, inView)

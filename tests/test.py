@@ -4,7 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-
 """
 # two classes
     model and agent
@@ -22,7 +21,7 @@ jumpingDistance = 5
 
 model = SimpleClusteringModel(numAnts, densityOfParticels, stepSize, jumpingDistance)
 data = []
-for i in range(0,100):
+for i in range(0, 100):
     model.step()
     agent_counts = np.zeros((model.grid.width, model.grid.height))
 
@@ -37,5 +36,3 @@ for i in data:
     plt.imshow(i, interpolation='nearest')
     plt.colorbar()
     plt.show()
-
-
